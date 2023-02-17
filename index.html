@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Check Rek - Cek Nama Rekening</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rootsec.xyz"/>
+    <meta property="og:title" content="Check Rek - Cek Nama Rekening"/>
+    <meta property="og:description" content="Check Rek memudahkan kita untuk mengecek dan validasi nama dari nomor rekening seseorang."/>
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/94370774?v=4">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://google.com"/>
+    <meta property="twitter:title" content="Check Rek - Cek Nama Rekening">
+    <meta property="twitter:description" content="Check Rek memudahkan kita untuk mengecek dan validasi nama dari nomor rekening seseorang."/>
+    <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/94370774?v=4">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"/>
+
+    <style>
+      .section {
+        margin-top: 2em;
+      }
+      .wrapper {
+    max-width: 600px;
+    margin: auto;
+      }
+      .judul-wrapper span {
+    font-size: 23px;
+    margin-left: 10px;
+    align-items: center;
+    font-weight: 600;
+    vertical-align: middle;
+    color: #000;
+}
+
+.judul-wrapper {
+    align-items: center;
+    vertical-align: middle;
+    display: flex;
+}
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="app" class="container-fluid" style="padding-top: 2em">
+      <div class="judul-wrapper"><a href="https://github.com/tahaluindo"><svg height="30" preserveAspectRatio="xMidYMid meet" viewBox="0 0 102.000000 60.000000" width="51"><g fill="#ff2bc2" stroke="none" transform="translate(0.000000,60.000000) scale(0.100000,-0.100000)"><path d="M0 300 l0 -300 510 0 510 0 0 300 0 300 -510 0 -510 0 0 -300z m396 176 c7 -17 13 -23 14 -14 0 24 39 48 77 48 40 0 47 -13 63 -125 17 -123 20 -126 42 -61 l20 58 -21 29 c-33 45 -13 78 61 100 26 7 31 4 48 -24 11 -18 20 -45 20 -61 0 -47 -82 -186 -110 -186 -6 0 -10 -13 -10 -30 0 -28 2 -29 26 -20 36 14 42 13 54 -11 13 -24 -6 -51 -52 -75 -41 -21 -66 -17 -99 15 -26 26 -28 34 -23 74 5 37 3 47 -13 58 -11 8 -27 41 -37 79 -10 37 -26 77 -36 90 l-19 25 -10 -27 c-14 -37 -20 -39 -84 -24 -31 7 -57 10 -57 6 0 -4 3 -22 6 -40 l7 -32 57 6 c55 6 58 6 64 -18 3 -14 1 -37 -4 -52 -9 -23 -15 -26 -43 -21 -17 3 -40 8 -50 12 -15 6 -16 4 -7 -20 16 -43 12 -100 -9 -119 -31 -28 -82 -31 -114 -6 -39 31 -34 64 11 68 17 2 32 6 32 10 0 4 -18 62 -40 130 -55 171 -45 204 58 183 45 -9 67 -8 102 2 53 16 58 14 76 -27z m468 -41 c-2 -152 -2 -232 0 -285 1 -54 1 -55 -30 -58 -16 -2 -43 2 -58 7 -26 10 -27 13 -21 58 4 27 11 63 15 82 6 22 4 52 -5 90 -8 31 -16 78 -17 105 -3 44 0 51 22 63 14 7 41 12 60 11 l35 -3 -1 -70z m-423 -257 c0 -10 2 -10 6 0 9 23 23 12 23 -18 0 -25 -4 -30 -25 -30 -20 0 -25 5 -25 25 0 14 -4 25 -10 25 -5 0 -10 -12 -10 -26 0 -15 -4 -23 -11 -19 -6 4 -8 13 -5 21 3 8 1 14 -4 14 -6 0 -10 -9 -10 -20 0 -15 -6 -20 -27 -19 -25 0 -26 1 -8 9 11 5 14 9 6 9 -7 1 -11 7 -8 15 3 8 1 17 -6 20 -7 2 16 5 51 5 43 1 62 -3 63 -11z"></path></g></svg> <span>Cek Rekening</span></a></div>
+        <div class="justify-content-center">
+          <h3 class="h3 font-weight-bold text-center mt-5 mb-3">
+            Cek Nama Rekening
+          </h3>
+          <div class="form-row">
+            <div class="col col-md-6">
+              <label for="bank" class="col-form-group">Account Bank</label>
+              <select
+                id="bank"
+                class="form-control"
+                v-model="account.bank"
+                aria-describedby="emptyBank"
+              >
+                <option
+                  v-for="(bank, index) in bankList"
+                  :key="index"
+                  :value="bank.value"
+                  :selected="index === 0"
+                >
+                  {{ bank.placeholder }}
+                </option>
+              </select>
+              <small
+                id="emptyBank"
+                class="form-text text-muted"
+                v-if="!account.bank"
+              >
+                Account Bank is required
+              </small>
+            </div>
+            <div class="col col-md-6">
+              <label for="number" class="col-form-group">Account Number</label>
+              <input
+                type="number"
+                id="number"
+                class="form-control"
+                v-model="account.number"
+                required
+              />
+              <div
+                class="mt-1 text-danger"
+                v-if="!account.number || account.number.length < 10"
+              >
+                <small>
+                  {{
+                    !account.number
+                      ? '*Account Number is required'
+                      : (account.number.length < 10 ? '*Please input above 10 characters' : '')
+                  }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive mb-2 mt-2" v-if="result">
+            <table class="table align-items-center">
+              <thead>
+                <tr>
+                  <th>Account Bank</th>
+                  <th>Account Number</th>
+                  <th>Account Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ getBankName(account.bank) }}</td>
+                  <td>{{ account.number }}</td>
+                  <td>{{ result }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-row">
+            <div class="col col-md-12">
+              <button
+                class="btn btn-sm btn-success btn-block mt-2"
+                @click="check"
+                :disabled="loading || (!account.number || account.number.length < 10)"
+              >
+                <i class="fas fa-sync fa-spin" v-if="loading"></i>
+                Check
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer
+        style="
+          background-color: rgb(236, 236, 236);
+          width: 100%;
+          font-size: 80%;
+          margin-top: 5em;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          bottom: 0;
+        "
+      >
+        <div class="container">
+          <i>
+            Copyright ©
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+          </i>
+        </div>
+      </footer>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            url: "https://cekrek.heirro.dev/api/check",
+            result: null,
+            bankList: [
+              { value: "bca", placeholder: "BCA" },
+              { value: "royal", placeholder: "Blue By BCA" },
+              { value: "bni", placeholder: "BNI" },
+              { value: "bri", placeholder: "BRI" },
+              { value: "mandiri", placeholder: "Mandiri" },
+              { value: "cimb", placeholder: "CIMB Niaga" },
+              { value: "Permata", placeholder: "Permata" },
+              { value: "danamon", placeholder: "Danamon" },
+              { value: "dki", placeholder: "Bank DKI" },
+              {
+                value: "tabungan_pensiunan_nasional",
+                placeholder: "BTPN/ Jenius",
+              },
+              { value: "national_nobu", placeholder: "Bank Nobu" },
+              { value: "artos", placeholder: "Bank Jago" },
+              { value: "hana", placeholder: "Hana Bank/ Line" },
+              { value: "linkaja", placeholder: "LinkAja!" },
+              { value: "gopay", placeholder: "GoPay" },
+              { value: "ovo", placeholder: "OVO" },
+              { value: "dana", placeholder: "DANA" },
+            ],
+            account: {
+              bank: "bca",
+              number: null,
+            },
+            loading: false,
+            validationError: false,
+          };
+        },
+        methods: {
+          async check() {
+            this.result = null;
+            this.loading = true;
+            try {
+              var { data } = await axios.post(
+                this.url,
+                {
+                  accountBank: this.account.bank,
+                  accountNumber: this.account.number,
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                }
+              );
+
+              if (data.status === 200) {
+                this.result = data.data[0]["accountName"];
+              } else {
+                this.result = data.message;
+              }
+            } catch (e) {
+              console.error('something went wrong : ', e);
+            } finally {
+              this.loading = false;
+            }
+          },
+          getBankName(name) {
+            return this.bankList.filter(({ value }) => value === name)[0]["placeholder"];
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
